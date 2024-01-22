@@ -1,0 +1,53 @@
+import styled from "styled-components";
+import React from "react";
+import Photo from "../components/Photo";
+
+const PhotoPage = () => {
+  const imageIndices = [1, 2, 3, 4, 5, 6, 7, 8];
+
+  return (
+    <PageWrapper>
+      <TopWrapper>EAST_FILMM</TopWrapper>
+      <SubTileWrapper>[ Gallery ]</SubTileWrapper>
+      <MainWrapper>
+        <Main>
+          {imageIndices.map((index) => (
+            <Photo key={index} index={index} />
+          ))}
+        </Main>
+      </MainWrapper>
+      <BottomWrapper>Bottom</BottomWrapper>
+    </PageWrapper>
+  );
+};
+
+export default PhotoPage;
+
+const PageWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  align-items: center;
+`;
+
+const TopWrapper = styled.div`
+  flex: 1;
+  font-size: 3rem;
+`;
+
+const MainWrapper = styled.div`
+  flex: 5;
+`;
+
+const Main = styled.div`
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const BottomWrapper = styled.div`
+  flex: 1;
+`;
+
+const SubTileWrapper = styled.div``;
