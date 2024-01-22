@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import React from "react";
 import Photo from "../components/Photo";
+import Intro from "../components/Intro";
 
 const PhotoPage = () => {
   const imageIndices = [1, 2, 3, 4, 5, 6, 7, 8];
@@ -16,7 +17,9 @@ const PhotoPage = () => {
           ))}
         </Main>
       </MainWrapper>
-      <BottomWrapper>Bottom</BottomWrapper>
+      <BottomWrapper>
+        <Intro />
+      </BottomWrapper>
     </PageWrapper>
   );
 };
@@ -51,6 +54,7 @@ const Main = styled.div`
 
 const BottomWrapper = styled.div`
   flex: 1;
+  margin-top: 1rem;
 `;
 
 const SubTileWrapper = styled.div`
