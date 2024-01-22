@@ -4,7 +4,7 @@ import Photo from "../components/Photo";
 import Intro from "../components/Intro";
 
 const PhotoPage = () => {
-  const imageIndices = [1, 2, 3, 4, 5, 6, 7, 8];
+  const imageIndices = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
   return (
     <PageWrapper>

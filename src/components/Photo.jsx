@@ -10,10 +10,11 @@ const Photo = ({ index, subtitle }) => {
     "Seoul",
     "Tokyo",
     "Las Vegas",
-    "Daegu",
+    "Bangko",
+    "Pohang",
     "Busan",
     "Daegu",
-    "Pohang",
+    "Daegu",
   ];
 
   useEffect(() => {

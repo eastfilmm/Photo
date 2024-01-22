@@ -4,6 +4,7 @@ import styled from "styled-components";
 const Intro = () => {
   return (
     <IntorWrapper>
+      <Intor>I Can Do This All Day!</Intor>
       <Intor>More Photos In My Instagram Account!</Intor>
       <SNSLink
         href="https://www.instagram.com/east_filmm/"
