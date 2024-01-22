@@ -9,6 +9,7 @@ const PhotoPage = () => {
   return (
     <PageWrapper>
       <TopWrapper>EAST_FILMM</TopWrapper>
+      <SmallWrapper>Landscape & Street</SmallWrapper>
       <SubTileWrapper>[ Gallery ]</SubTileWrapper>
       <MainWrapper>
         <Main>
@@ -37,8 +38,13 @@ const PageWrapper = styled.div`
 const TopWrapper = styled.div`
   flex: 1;
   font-size: 3rem;
-  color: #f2d522;
+  color: #fedf04;
   font-weight: bold;
+`;
+
+const SmallWrapper = styled.div`
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
 `;
 
 const MainWrapper = styled.div`
