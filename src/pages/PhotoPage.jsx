@@ -28,11 +28,14 @@ const PageWrapper = styled.div`
   flex-direction: column;
   height: 100%;
   align-items: center;
+  font-weight: bold;
 `;
 
 const TopWrapper = styled.div`
   flex: 1;
   font-size: 3rem;
+  color: #f2d522;
+  font-weight: bold;
 `;
 
 const MainWrapper = styled.div`
@@ -50,4 +53,7 @@ const BottomWrapper = styled.div`
   flex: 1;
 `;
 
-const SubTileWrapper = styled.div``;
+const SubTileWrapper = styled.div`
+  font-size: 30px;
+  margin-bottom: 5px;
+`;
