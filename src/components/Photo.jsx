@@ -1,21 +1,10 @@
 import styled from "styled-components";
 import React, { useState, useEffect } from "react";
-import LazyLoad from "react-lazyload"; // react-lazyload 패키지 import
+import LazyLoad from "react-lazyload";
 
-const Photo = ({ index, subtitle }) => {
+const Photo = ({ index }) => {
   const [imagePath, setImagePath] = useState(null);
   const [loading, setLoading] = useState(true);
-  const subtitles = [
-    "Jeju",
-    "Seoul",
-    "Tokyo",
-    "Las Vegas",
-    "Bangko",
-    "Pohang",
-    "Busan",
-    "Daegu",
-    "Daegu",
-  ];
 
   useEffect(() => {
     const importImage = async () => {
@@ -43,11 +32,9 @@ const Photo = ({ index, subtitle }) => {
 
   return (
     <Wrapper>
-      {/* LazyLoad 컴포넌트로 감싸기 */}
       <LazyLoad height={200} offset={100}>
         <ImageWrapper src={imagePath} alt={`${index}`} />
       </LazyLoad>
-      <TitleWrapper>{subtitles[index - 1]}</TitleWrapper>
     </Wrapper>
   );
 };
@@ -56,23 +43,14 @@ export default Photo;
 
 const Wrapper = styled.div`
   align-items: center;
-  font-size: 20px;
-  font-weight: bold;
-`;
-
-const TitleWrapper = styled.div`
-  text-align: center;
-  max-width: 100%;
-  align-items: center;
-  margin-bottom: 0.5rem;
-  font-size: 20px;
+  width: 45rem;
+  height: 30rem;
 `;
 
 const ImageWrapper = styled.img`
-  max-width: 80%;
-  height: auto;
+  max-width: 45rem;
+  height: 30rem;
   margin-top: 0.5rem;
-  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.7);
 `;
 
 const LoadingIndicator = styled.div`

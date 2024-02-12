@@ -4,7 +4,7 @@ import styled from "styled-components";
 const Intro = () => {
   return (
     <IntorWrapper>
-      <Intor>I Can Do This All Day!</Intor>
+      <Intor>Life On The Street</Intor>
       <Intor>More Photos In My Instagram Account!</Intor>
       <SNSLink
         href="https://www.instagram.com/east_filmm/"
@@ -20,17 +20,17 @@ const Intro = () => {
 export default Intro;
 
 const IntorWrapper = styled.div`
-  font-size: 15px;
   display: flex;
   flex-direction: column;
 `;
 
 const Intor = styled.div`
-  font-size: 15px;
+  font-size: 0.8rem;
 `;
 
 const SNSLink = styled.a`
-  font-size: 20px;
+  margin-top: 4px;
+  font-size: 1rem;
   cursor: pointer;
   color: black;
   text-decoration: underline;
