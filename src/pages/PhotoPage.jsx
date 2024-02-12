@@ -19,7 +19,6 @@ const PhotoPage = () => {
     );
   };
 
-  // intro 컴포넌트를 useMemo로 감싸고 imageIndices를 의존성 배열로 지정
   const introComponent = useMemo(() => <Intro />, [imageIndices]);
 
   return (
@@ -36,10 +35,7 @@ const PhotoPage = () => {
         </Main>
         <RightBTN onClick={goToNextImage}>{">"}</RightBTN>
       </MainWrapper>
-      <BottomWrapper>
-        {/* memoized intro 컴포넌트 */}
-        {introComponent}
-      </BottomWrapper>
+      <BottomWrapper>{introComponent}</BottomWrapper>
     </PageWrapper>
   );
 };
@@ -78,7 +74,7 @@ const Main = styled.div`
 
 const BottomWrapper = styled.div`
   flex: 1;
-  margin-top: 1rem;
+  margin-top: 2rem;
 `;
 
 const RightBTN = styled.div`
