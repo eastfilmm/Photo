@@ -1,6 +1,7 @@
 import styled from "styled-components";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import LazyLoad from "react-lazyload";
+import PropTypes from "prop-types";
 
 const Photo = ({ index }) => {
   const [imagePath, setImagePath] = useState(null);
@@ -21,7 +22,11 @@ const Photo = ({ index }) => {
   }, [index]);
 
   if (loading) {
-    return <LoadingIndicator>Loading...</LoadingIndicator>;
+    return (
+      <LoadingIndicator>
+        <p>Loading...</p>
+      </LoadingIndicator>
+    );
   }
 
   if (!imagePath) {
@@ -37,6 +42,10 @@ const Photo = ({ index }) => {
       </LazyLoad>
     </Wrapper>
   );
+};
+
+Photo.propTypes = {
+  index: PropTypes.number.isRequired,
 };
 
 export default Photo;
@@ -56,6 +65,11 @@ const ImageWrapper = styled.img`
 const LoadingIndicator = styled.div`
   font-size: 16px;
   color: #777;
+  width: 45rem;
+  height: 30rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const ErrorIndicator = styled.div`

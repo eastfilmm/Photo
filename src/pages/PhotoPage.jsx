@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import React, { useState, useMemo } from "react"; // useState와 useMemo 추가
+import { useState, useMemo } from "react"; // useState와 useMemo 추가
 import Photo from "../components/Photo";
 import Intro from "../components/Intro";
 
