@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
 import LazyLoad from "react-lazyload";
-import PropTypes from "prop-types";
 
 const Photo = ({ index }) => {
   const [imagePath, setImagePath] = useState(null);
@@ -36,37 +35,41 @@ const Photo = ({ index }) => {
   }
 
   return (
-    <Wrapper>
-      <LazyLoad height={200} offset={100}>
-        <ImageWrapper src={imagePath} alt={`${index}`} />
+    <Wrapper isVertical={index >= 11}>
+      <LazyLoad height={index >= 11 ? 450 : 300} offset={1000}>
+        <ImageWrapper
+          src={imagePath}
+          alt={`${index}`}
+          isVertical={index >= 11}
+        />
       </LazyLoad>
     </Wrapper>
   );
 };
 
-Photo.propTypes = {
-  index: PropTypes.number.isRequired,
-};
-
 export default Photo;
 
 const Wrapper = styled.div`
+  display: flex;
   align-items: center;
+  justify-content: center;
   width: 45rem;
-  height: 30rem;
+  height: 45rem;
 `;
 
 const ImageWrapper = styled.img`
-  max-width: 45rem;
-  height: 30rem;
-  margin-top: 0.5rem;
+  max-width: ${(props) => (props.isVertical ? "30rem" : "45rem")};
+  height: ${(props) => (props.isVertical ? "45rem" : "30rem")};
+  display: block;
+  border: none;
+  outline: none;
+  box-shadow: none;
 `;
 
 const LoadingIndicator = styled.div`
   font-size: 16px;
-  color: #777;
   width: 45rem;
-  height: 30rem;
+  height: 45rem;
   display: flex;
   align-items: center;
   justify-content: center;

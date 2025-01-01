@@ -45,12 +45,12 @@ export default PhotoPage;
 const PageWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: 100vh;
   align-items: center;
 `;
 
 const TopWrapper = styled.div`
-  flex: 1;
+  /* flex: 1; */
   font-size: 1.5rem;
   color: black;
   font-weight: bold;
@@ -68,8 +68,9 @@ const MainWrapper = styled.div`
 `;
 
 const Main = styled.div`
-  justify-content: space-around;
+  display: flex;
   align-items: center;
+  justify-content: center;
 `;
 
 const BottomWrapper = styled.div`
