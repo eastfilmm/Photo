@@ -1,39 +1,85 @@
 import styled from "styled-components";
-import { useState, useMemo } from "react"; // useState와 useMemo 추가
+import { useState, useEffect, useMemo } from "react";
 import Photo from "../components/Photo";
 import Intro from "../components/Intro";
 
 const PhotoPage = () => {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const imageIndices = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+  const baseImages = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+  // 무한 슬라이드를 위해 앞뒤로 이미지 추가
+  const imageIndices = [
+    baseImages[baseImages.length - 1],
+    ...baseImages,
+    baseImages[0],
+  ];
+  const [currentIndex, setCurrentIndex] = useState(1);
+  const [isAnimating, setIsAnimating] = useState(false);
 
-  const goToNextImage = () => {
-    setCurrentImageIndex((prevIndex) =>
-      prevIndex === imageIndices.length - 1 ? 0 : prevIndex + 1
-    );
+  const [transform, setTransform] = useState({
+    transform: `translateX(-${currentIndex * 100}%)`,
+    transition: "transform 0.5s ease-out",
+  });
+
+  const handleNext = () => {
+    if (isAnimating) return;
+    setIsAnimating(true);
+    setCurrentIndex((prev) => prev + 1);
   };
 
-  const goToPreviousImage = () => {
-    setCurrentImageIndex((prevIndex) =>
-      prevIndex === 0 ? imageIndices.length - 1 : prevIndex - 1
-    );
+  const handlePrev = () => {
+    if (isAnimating) return;
+    setIsAnimating(true);
+    setCurrentIndex((prev) => prev - 1);
   };
 
-  const introComponent = useMemo(() => <Intro />, [imageIndices]);
+  useEffect(() => {
+    setTransform({
+      transform: `translateX(-${currentIndex * 100}%)`,
+      transition: "transform 0.5s ease-out",
+    });
+
+    const timer = setTimeout(() => {
+      setIsAnimating(false);
+
+      // 마지막 슬라이드에서 첫 번째로 순간이동
+      if (currentIndex === imageIndices.length - 1) {
+        setTransform({
+          transform: `translateX(-100%)`,
+          transition: "none",
+        });
+        setCurrentIndex(1);
+      }
+
+      // 첫 번째 슬라이드에서 마지막으로 순간이동
+      if (currentIndex === 0) {
+        setTransform({
+          transform: `translateX(-${imageIndices.length - 2}00%)`,
+          transition: "none",
+        });
+        setCurrentIndex(imageIndices.length - 2);
+      }
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, [currentIndex, imageIndices.length]);
+
+  const introComponent = useMemo(() => <Intro />, []);
 
   return (
     <PageWrapper>
       <TopWrapper>EAST_FILMM</TopWrapper>
       <SmallWrapper>Film & Digital</SmallWrapper>
       <MainWrapper>
-        <LeftBTN onClick={goToPreviousImage}>{"<"}</LeftBTN>
-        <Main>
-          <Photo
-            key={imageIndices[currentImageIndex]}
-            index={imageIndices[currentImageIndex]}
-          />
-        </Main>
-        <RightBTN onClick={goToNextImage}>{">"}</RightBTN>
+        <LeftBTN onClick={handlePrev}>{"<"}</LeftBTN>
+        <SliderContainer>
+          <SliderTrack style={transform}>
+            {imageIndices.map((index, i) => (
+              <SlideItem key={i}>
+                <Photo index={index} />
+              </SlideItem>
+            ))}
+          </SliderTrack>
+        </SliderContainer>
+        <RightBTN onClick={handleNext}>{">"}</RightBTN>
       </MainWrapper>
       <BottomWrapper>{introComponent}</BottomWrapper>
     </PageWrapper>
@@ -64,12 +110,11 @@ const MainWrapper = styled.div`
   flex: 5;
   display: flex;
   flex-direction: row;
-`;
-
-const Main = styled.div`
-  display: flex;
   align-items: center;
-  justify-content: center;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
 `;
 
 const BottomWrapper = styled.div`
@@ -79,18 +124,42 @@ const BottomWrapper = styled.div`
 
 const RightBTN = styled.div`
   cursor: pointer;
-  margin-left: 1rem;
   font-size: 1.5rem;
   font-weight: bold;
-  display: flex;
-  align-items: center;
+  position: absolute;
+  right: -2rem;
+  z-index: 1;
 `;
 
 const LeftBTN = styled.div`
   cursor: pointer;
-  margin-right: 1rem;
   font-size: 1.5rem;
   font-weight: bold;
+  position: absolute;
+  left: -2rem;
+  z-index: 1;
+`;
+
+const SliderContainer = styled.div`
+  width: 100%;
+  overflow: hidden;
+`;
+
+const SliderTrack = styled.div`
   display: flex;
+  width: 100%;
+`;
+
+const SlideItem = styled.div`
+  width: 100%;
+  flex: 0 0 100%;
+  display: flex;
+  justify-content: center;
   align-items: center;
+
+  img {
+    max-width: 100%;
+    max-height: 600px;
+    object-fit: contain;
+  }
 `;
